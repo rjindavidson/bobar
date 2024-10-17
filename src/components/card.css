@@ -1,0 +1,23 @@
+.card-info {
+    position: relative;
+    top: 60%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    width: 33%;
+    
+    @media screen and (max-width: 600px){
+        width: 100%;
+    }
+}
+
+
+.location-card {
+    margin-top: 40px;
+    box-shadow: 0px 0px 10px #A262A2;
+    width: 50%;
+    height: 200px;
+    background-size: contain;
+}

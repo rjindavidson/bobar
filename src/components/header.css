@@ -1,13 +1,24 @@
 .header-content {
     display: flex;
-    justify-content: space-between;
-    padding: 12px;
+    justify-content: space-around;
+    font-weight: bold;
+    padding: 16px;
     width: 100%;
     position: sticky;
     top: 0px;
-    background-color: yellow;
+    background-color: rgb(247, 240, 227);
+    /* background: linear-gradient(90deg, #228B22, #ebf8e1, #A262A2); */
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
 }
 
 .header-scrolled {
     box-shadow: 1px 1px 1px black;
+    opacity: 90%;
 }

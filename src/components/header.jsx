@@ -13,7 +13,6 @@ const Header = () => {
     return (
         <header className='header-content' id='header'>
             <a href="">Boba (home)</a>
-            <div>This will be the header</div>
             <a href="">Profile</a>
         </header>
     )

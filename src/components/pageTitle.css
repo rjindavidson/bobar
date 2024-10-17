@@ -1,3 +1,5 @@
 .bobar-header {
     font-size: 4.8rem;
+    text-decoration: underline;
+    font-family: 'Courier New', Courier, monospace;
 }

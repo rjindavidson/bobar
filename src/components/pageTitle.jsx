@@ -4,7 +4,7 @@ import './pageTitle.css'
 const PageTitle = ({title}) => {
     return (
         <div className="bobar-header">
-            {title}
+            <p>{title}</p>
         </div>
     )
 }
