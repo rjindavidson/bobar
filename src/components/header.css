@@ -1,0 +1,13 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    background-color: yellow;
+}
+
+.header-scrolled {
+    box-shadow: 1px 1px 1px black;
+}
