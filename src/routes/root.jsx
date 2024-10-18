@@ -1,8 +1,8 @@
-import PageTitle from "./components/pageTitle";
-import './app.css';
-import Card from "./components/card";
+import PageTitle from "../components/pageTitle";
+import './root.css';
+import Card from "../components/card";
 
-const App = () => {
+const Root = () => {
     return (
         <div className="layout-container">
             <PageTitle title="Bobar"/>
@@ -12,4 +12,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default Root;

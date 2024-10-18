@@ -12,8 +12,8 @@ const Header = () => {
     });
     return (
         <header className='header-content' id='header'>
-            <a href="">Boba (home)</a>
-            <a href="">Profile</a>
+            <a href={`/`}>Boba (home)</a>
+            <a href={`/profile`}>Profile</a>
         </header>
     )
 }
