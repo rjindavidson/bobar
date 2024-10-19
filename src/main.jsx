@@ -5,7 +5,7 @@ import './main.css'
 import Root from './routes/root';
 import Header from './components/header';
 import ErrorPage from './errorPage';
-import Sunright from './routes/sunright';
+import Teashop from './routes/teashop';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/Sunright",
-    element: <Sunright />
+    path: "shops/:shopName",
+    element: <Teashop />
   }
 ]);
 
