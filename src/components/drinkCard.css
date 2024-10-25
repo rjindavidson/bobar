@@ -1,0 +1,8 @@
+.drink-card {
+    width: 100%;
+    height: 200px;
+}
+
+.drink-card:hover {
+    background-color: red;
+}

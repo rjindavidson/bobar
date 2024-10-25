@@ -1,3 +1,17 @@
+.bobar-button {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: white;
+    transition: background-color 0.5s;
+    font-weight: bold;
+}
+
+.bobar-button:hover {
+    background-color: #A262A2;
+    box-shadow: 0px 6px 12px #A0C8F9;
+}
+
 .teashop-main {
     text-align: center;
 }
