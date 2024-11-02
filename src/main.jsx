@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "shops/:shopName",
     element: <Teashop />,
-  }
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
