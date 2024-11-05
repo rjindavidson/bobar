@@ -18,7 +18,7 @@ const Teashop = () => {
 
     useEffect(() => {
         async function getBobar() {
-          const response = await fetch(`http://localhost:5000/bobar`);
+          const response = await fetch(`http://localhost:5000/bobar/${pathName}`)
           if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`;
             console.error(message);
@@ -29,7 +29,7 @@ const Teashop = () => {
         }
         getBobar();
         return;
-      }, []);
+      }, [pathName]);
 
     const getRandomDrink = () => {
         const selectedArr = [...selected]
