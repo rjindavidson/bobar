@@ -34,7 +34,12 @@ const Teashop = () => {
     const getRandomDrink = () => {
         const selectedArr = [...selected]
         const range = Math.floor(Math.random() * selectedArr.length);
-        alert(selectedArr[range]);
+        selectedArr.length > 0 ? alert(selectedArr[range]) : alert("No drinks selected!")
+    }
+
+    const addRemoveDrink = (drinkName) => {
+        selected.has(drinkName) ? selected.delete(drinkName) : selected.add(drinkName);
+        setSelected(new Set(selected))
     }
 
     const drinkList = () => {
@@ -43,7 +48,7 @@ const Teashop = () => {
                 return (
                     <DrinkCard 
                         drinkName={drink.name} 
-                        addDrink={() => setSelected(prevState => new Set(prevState).add(drink.name))}
+                        addDrink={() => addRemoveDrink(drink.name)}
                         key={drink._id}
                     />
                 )

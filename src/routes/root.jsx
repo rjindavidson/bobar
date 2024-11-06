@@ -2,11 +2,6 @@ import PageTitle from "../components/pageTitle";
 import './root.css';
 import Card from "../components/card";
 
-export const loader = async () => {
-    const data = await 'Test'
-    return data;
-}
-
 const Root = () => {
 
     return (

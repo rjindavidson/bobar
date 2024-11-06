@@ -1,16 +1,28 @@
+import { useState } from "react";
 import "./drinkCard.css";
 
 // eslint-disable-next-line react/prop-types
 const DrinkCard = ({ drinkName, addDrink }) => {
+    const [added, setAdded] = useState(false)
 
+    const cardOnClick = () => {
+        setAdded(!added)
+        addDrink()
+    }
 
     return (
-        <div className="drink-card" onClick={addDrink}>
+        <div className={`drink-card ${added ? "drink-card-selected" : ""}`}>
             <p>{drinkName}</p>
+            {added ?
+                <button className="bobar-button" onClick={cardOnClick}>
+                    &#40;&#8722;&#41; Remove
+                </button> :
+                <button className="bobar-button" onClick={cardOnClick}>
+                    &#40;&#43;&#41; Add
+                </button>
+            }
         </div>
     )
 }
 
 export default DrinkCard;
-
-//https://github.com/mongodb-developer/mern-stack-example
