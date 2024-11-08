@@ -110,19 +110,20 @@ const Teashop = () => {
                     toggleDialog()
                 }
             }}>
-                <form method="dialog" onSubmit={onSubmit}>
+                <form method="dialog" onSubmit={onSubmit} className="dialog-popup">
                     <div>
                         <label>Drink name:</label>
                         <input 
-                            type="text" 
-                            name="name" 
-                            id="name" 
+                            type="text"
+                            name="name"
+                            id="name"
+                            autoComplete="off"
                             required
                             onChange={(e) => updateForm({ name: e.target.value, location: `${pathName}` })}
                             />
                         <div className="button-pair">
-                            <input type="submit" value="Submit"/>
-                            <button onClick={toggleDialog}>Close</button>
+                            <input type="submit" value="Submit" className="bobar-button"/>
+                            <button onClick={toggleDialog} className="bobar-button">Close</button>
                         </div>
                     </div>
                 </form>

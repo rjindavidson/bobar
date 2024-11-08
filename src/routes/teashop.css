@@ -26,6 +26,11 @@
     transform: translate(-50%, -50%);
 }
 
+.dialog-popup {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 8px;
+}
+
 .teashop-main {
     text-align: center;
 }
@@ -35,4 +40,8 @@
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     margin: 32px 160px;
     gap: 32px;
+
+    @media screen and (max-width: 600px){
+        margin: 32px 0px;
+    }
 }
