@@ -3,7 +3,7 @@ import "./drinkCard.css";
 import defaultCardImg from "../assets/boba-bear.png"
 
 // eslint-disable-next-line react/prop-types
-const DrinkCard = ({ drinkName, addDrink }) => {
+const DrinkCard = ({ drinkName, addDrink, deleteDrink }) => {
     const [added, setAdded] = useState(false)
 
     const cardOnClick = () => {
@@ -20,13 +20,13 @@ const DrinkCard = ({ drinkName, addDrink }) => {
             <div>
                 {added ?
                     <button className="bobar-button" onClick={cardOnClick}>
-                        &#40;&#8722;&#41; Remove
+                        &#40;&#8722;&#41;
                     </button> :
                     <button className="bobar-button" onClick={cardOnClick}>
-                        &#40;&#43;&#41; Add
+                        &#40;&#43;&#41;
                     </button>
                 }
-                <button className="bobar-button" onClick={cardOnClick}>
+                <button className="bobar-button" onClick={() => deleteDrink()}>
                     Delete
                 </button>
             </div>

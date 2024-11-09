@@ -18,18 +18,26 @@ const Teashop = () => {
 
     useEffect(() => {
         async function getBobar() {
-          const response = await fetch(`http://localhost:5000/bobar/${pathName}`)
-          if (!response.ok) {
-            const message = `An error occurred: ${response.statusText}`;
-            console.error(message);
-            return;
-          }
-          const records = await response.json();
-          setData(records);
+            const response = await fetch(`http://localhost:5000/bobar/${pathName}`)
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                console.error(message);
+                return;
+            }
+            const records = await response.json();
+            setData(records);
         }
         getBobar();
         return;
-      }, [pathName]);
+    }, [pathName]);
+
+    const deleteDrink = async (drinkId) => {
+        await fetch(`http://localhost:5000/bobar/${drinkId}`, {
+            method: "DELETE",
+        });
+        const newData = data.filter((item) => item._id !== drinkId);
+        setData(newData);
+    }
 
     const getRandomDrink = () => {
         const selectedArr = [...selected]
@@ -46,9 +54,10 @@ const Teashop = () => {
         try {
             return data.map((drink) => {
                 return (
-                    <DrinkCard 
-                        drinkName={drink.name} 
+                    <DrinkCard
+                        drinkName={drink.name}
                         addDrink={() => addRemoveDrink(drink.name)}
+                        deleteDrink={() => deleteDrink(drink._id)}
                         key={drink._id}
                     />
                 )
@@ -89,14 +98,14 @@ const Teashop = () => {
     };
 
     const toggleDialog = () => {
-        if(!dialogRef.current) {
+        if (!dialogRef.current) {
             return;
         }
         dialogRef.current.hasAttribute("open")
             ? dialogRef.current.close()
             : dialogRef.current.showModal()
     }
-    
+
     return (
         <div className="teashop-main">
             <PageTitle title={pathName} />
@@ -105,7 +114,7 @@ const Teashop = () => {
             <div className="teashop-grid">
                 {drinkList()}
             </div>
-            <dialog ref={dialogRef}  className="dialog-center" onClick={(e) => {
+            <dialog ref={dialogRef} className="dialog-center" onClick={(e) => {
                 if (e.currentTarget === e.target) {
                     toggleDialog()
                 }
@@ -113,16 +122,16 @@ const Teashop = () => {
                 <form method="dialog" onSubmit={onSubmit} className="dialog-popup">
                     <div>
                         <label>Drink name:</label>
-                        <input 
+                        <input
                             type="text"
                             name="name"
                             id="name"
                             autoComplete="off"
                             required
                             onChange={(e) => updateForm({ name: e.target.value, location: `${pathName}` })}
-                            />
+                        />
                         <div className="button-pair">
-                            <input type="submit" value="Submit" className="bobar-button"/>
+                            <input type="submit" value="Submit" className="bobar-button" />
                             <button onClick={toggleDialog} className="bobar-button">Close</button>
                         </div>
                     </div>
