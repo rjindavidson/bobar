@@ -1,35 +1,35 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PageTitle from "../components/pageTitle";
 import './teashop.css';
 import DrinkCard from "../components/drinkCard";
 
 const Teashop = () => {
     const pathName = useLocation().pathname.slice(7); // gets /:shopName from root router
-    const [data, setData] = useState('');
+    const [data, setData] = useState(null);
     const [form, setForm] = useState({
         name: "",
         location: ""
     });
     const [selected, setSelected] = useState(new Set());
-    const navigate = useNavigate();
     const dialogRef = useRef(null);
 
     useEffect(() => {
-        async function getBobar() {
-            const response = await fetch(`http://localhost:5000/bobar/${pathName}`)
-            if (!response.ok) {
-                const message = `An error occurred: ${response.statusText}`;
-                console.error(message);
-                return;
-            }
-            const records = await response.json();
-            setData(records);
-        }
         getBobar();
         return;
-    }, [pathName]);
+    }, []);
+
+    const getBobar = async () => {
+        const response = await fetch(`http://localhost:5000/bobar/${pathName}`)
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            console.error(message);
+            return;
+        }
+        const records = await response.json();
+        setData(records);
+    }
 
     const deleteDrink = async (drinkId) => {
         await fetch(`http://localhost:5000/bobar/${drinkId}`, {
@@ -40,6 +40,7 @@ const Teashop = () => {
     }
 
     const getRandomDrink = () => {
+        console.log(data)
         const selectedArr = [...selected]
         const range = Math.floor(Math.random() * selectedArr.length);
         selectedArr.length > 0 ? alert(selectedArr[range]) : alert("No drinks selected!")
@@ -67,12 +68,25 @@ const Teashop = () => {
         }
     }
 
+    // TODO: Update DB to not look over every existing drink here
+    const checkDuplicateDrink = (newDrink) => {
+        for (const key in data) {
+            if (newDrink.name === data[key].name && newDrink.location === data[key].location) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const drink = { ...form };
         try {
-            let response;
-            response = await fetch("http://localhost:5000/bobar", {
+            if (checkDuplicateDrink(drink)) {
+                alert("Drink already exists!")
+                throw new Error("Drink already exists!")
+            }
+            let response = await fetch("http://localhost:5000/bobar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,13 +95,14 @@ const Teashop = () => {
             });
             if (!response.ok) { throw new Error(`HTTP error: ${response.status}`) }
         } catch (error) {
-            console.error("Error occurred:", error)
-        } finally {
+            console.error(error.message)
+        }
+        finally {
             setForm({
                 name: "",
                 location: "",
             });
-            navigate(0);
+            getBobar()
         }
     }
 
@@ -111,9 +126,15 @@ const Teashop = () => {
             <PageTitle title={pathName} />
             <button className="bobar-button" onClick={getRandomDrink}>Pick my drink!</button>
             <button className="bobar-button" onClick={toggleDialog}>Add new drink!</button>
-            <div className="teashop-grid">
-                {drinkList()}
-            </div>
+            {data ?
+                <div className="teashop-grid">
+                    {drinkList()}
+                </div>
+                :
+                <div className="header-content">
+                    No bobar added ;_;
+                </div>
+            }
             <dialog ref={dialogRef} className="dialog-center" onClick={(e) => {
                 if (e.currentTarget === e.target) {
                     toggleDialog()
@@ -125,9 +146,9 @@ const Teashop = () => {
                         <input
                             type="text"
                             name="name"
+                            value={form.name}
                             id="name"
                             autoComplete="off"
-                            required
                             onChange={(e) => updateForm({ name: e.target.value, location: `${pathName}` })}
                         />
                         <div className="button-pair">
