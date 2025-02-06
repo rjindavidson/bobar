@@ -7,7 +7,8 @@ import DrinkCard from "../components/drinkCard";
 
 const Teashop = () => {
     const pathName = useLocation().pathname.slice(7); // gets /:shopName from root router
-    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState([]);
     const [form, setForm] = useState({
         name: "",
         location: ""
@@ -16,7 +17,9 @@ const Teashop = () => {
     const dialogRef = useRef(null);
 
     useEffect(() => {
-        getBobar();
+        setIsLoading(true)
+        getBobar()
+            .then(() => setIsLoading(false))
         return;
     }, []);
 
@@ -122,17 +125,19 @@ const Teashop = () => {
     }
 
     return (
+        <>
+        {isLoading ?  <h1 className="loading-content">Loading...</h1>:
         <div className="teashop-main">
             <PageTitle title={pathName} />
             <button className="bobar-button" onClick={getRandomDrink}>Pick my drink!</button>
             <button className="bobar-button" onClick={toggleDialog}>Add new drink!</button>
-            {data ?
+            {data.length ?
                 <div className="teashop-grid">
                     {drinkList()}
                 </div>
                 :
                 <div className="header-content">
-                    No bobar added ;_;
+                    No drinks added!
                 </div>
             }
             <dialog ref={dialogRef} className="dialog-center" onClick={(e) => {
@@ -159,6 +164,8 @@ const Teashop = () => {
                 </form>
             </dialog>
         </div>
+        }
+        </>
     )
 }
 

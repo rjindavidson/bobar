@@ -31,6 +31,13 @@
     padding: 8px;
 }
 
+.loading-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
 .teashop-main {
     text-align: center;
 }
