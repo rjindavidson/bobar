@@ -3,12 +3,16 @@ import './root.css';
 import Card from "../components/card";
 
 const Root = () => {
-
     return (
         <nav className="layout-container">
-            <PageTitle title="Bobar"/>
-            <Card locationName="TP-TEA" distance={10} backgroundImage={'/src/assets/TPTEA.jpg'}/>
-            <Card locationName="Sunright" distance={5} backgroundImage={'/src/assets/SUNRIGHT.png'}/>
+            <PageTitle title="Bobar" />
+            <Card locationName="TP-TEA" backgroundImage={'/src/assets/TPTEA.jpg'} />
+            <Card locationName="Sunright" backgroundImage={'/src/assets/SUNRIGHT.png'} />
+            <Card locationName="Omomo"/>
+            <Card locationName="Sharetea"/>
+            <Card locationName="Feng Cha" backgroundImage={'/src/assets/SUNRIGHT.png'} />
+            <Card locationName="Wushiland" backgroundImage={'/src/assets/SUNRIGHT.png'} />
+            <Card locationName="Coming Soon" backgroundImage={'/src/assets/SUNRIGHT.png'} />
         </nav>
     )
 }

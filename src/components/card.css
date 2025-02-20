@@ -1,12 +1,13 @@
 .card-info {
     position: relative;
-    top: 60%;
+    top: 65%;
     text-align: center;
     background-color: black;
     color: white;
     font-weight: bold;
     font-size: 24px;
-    width: 33%;
+    width: 25%;
+    padding: 8px;
     
     @media screen and (max-width: 600px){
         width: 100%;
@@ -16,8 +17,12 @@
 
 .location-card {
     margin-top: 40px;
-    box-shadow: 0px 0px 10px #A262A2;
     width: 50%;
     height: 200px;
     background-size: contain;
+    transition: all .25s ease-in-out;
+}
+
+.location-card:hover {
+    transform: translateY(-10px);
 }

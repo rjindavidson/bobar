@@ -43,7 +43,6 @@ const Teashop = () => {
     }
 
     const getRandomDrink = () => {
-        console.log(data)
         const selectedArr = [...selected]
         const range = Math.floor(Math.random() * selectedArr.length);
         selectedArr.length > 0 ? alert(selectedArr[range]) : alert("No drinks selected!")
@@ -89,6 +88,9 @@ const Teashop = () => {
                 alert("Drink already exists!")
                 throw new Error("Drink already exists!")
             }
+            if (!drink.name || !drink.location) {
+                throw new Error("No drink was provided")
+            }
             let response = await fetch("http://localhost:5000/bobar", {
                 method: "POST",
                 headers: {
@@ -101,12 +103,16 @@ const Teashop = () => {
             console.error(error.message)
         }
         finally {
-            setForm({
-                name: "",
-                location: "",
-            });
-            getBobar()
+            clearForm();
+            getBobar();
         }
+    }
+
+    const clearForm = () => {
+        setForm({
+            name: "",
+            location: "",
+        })
     }
 
     const updateForm = (value) => {
@@ -115,7 +121,9 @@ const Teashop = () => {
         });
     };
 
-    const toggleDialog = () => {
+    const toggleDialog = (e) => {
+        e.preventDefault();
+        clearForm();
         if (!dialogRef.current) {
             return;
         }
@@ -142,7 +150,7 @@ const Teashop = () => {
             }
             <dialog ref={dialogRef} className="dialog-center" onClick={(e) => {
                 if (e.currentTarget === e.target) {
-                    toggleDialog()
+                    toggleDialog(e)
                 }
             }}>
                 <form method="dialog" onSubmit={onSubmit} className="dialog-popup">
